@@ -1,8 +1,4 @@
 require("lib/managers/VRManagerPD2")
-require("lib/units/beings/player/states/vr/playermenu")
-require("lib/managers/menu/VRCustomizationGui")
-require("lib/managers/HUDManagerVR")
-require("lib/utils/VRBodyCalibrator")
 
 Hooks:PostHook(Setup, "init_managers", "nri_pip_Setup:init_managers", function(self, managers)
 	managers.vr = VRManagerPD2:new()
