@@ -1,0 +1,40 @@
+{
+	"menu_id" : "nri_pip_menu",
+	"parent_menu_id" : "blt_options",
+	"title" : "nri_pip_menu_title",
+	"description" : "nri_pip_menu_desc",
+	"items" : [
+		{
+			"type" : "multiple_choice",
+			"id" : "nri_pip_res_scaling_choice",
+			"title" : "nri_pip_res_scaling_choice_title",
+			"description" : "nri_pip_res_scaling_choice_desc",
+			"callback" : "nri_pip_res_scaling_choice_callback",
+			"value" : "nri_pip_res_scaling",
+			"default_value" : 4,
+			"items" : 
+			[
+				"nri_pip_res_scaling_1",
+				"nri_pip_res_scaling_2",
+				"nri_pip_res_scaling_3",
+				"nri_pip_res_scaling_4"
+			]
+		},
+		{
+			"type" : "divider",
+			"size" : "32"
+		},
+		{
+			"type" : "slider",
+			"id" : "nri_pip_zoom_mul_slider",
+			"title" : "nri_pip_zoom_mul_title",
+			"description" : "nri_pip_zoom_mul_desc",
+			"callback" : "nri_pip_zoom_mul_callback",
+			"value" : "nri_pip_zoom_mul",
+			"default_value" : 1,
+			"min" : "1",
+			"max" : "2",
+			"step" : "0.2"
+		}
+	]
+}

@@ -1,0 +1,21 @@
+require("lib/managers/VRManagerPD2")
+require("lib/units/beings/player/states/vr/playermenu")
+require("lib/managers/menu/VRCustomizationGui")
+require("lib/managers/HUDManagerVR")
+require("lib/utils/VRBodyCalibrator")
+
+Hooks:PostHook(Setup, "init_managers", "nri_pip_Setup:init_managers", function(self, managers)
+	managers.vr = VRManagerPD2:new()
+end)
+Hooks:PostHook(Setup, "init_finalize", "nri_pip_Setup:init_finalize", function(self)
+	managers.vr:init_finalize()
+end)
+Hooks:PreHook(Setup, "update", "nri_pip_Setup:update", function(self, t, dt)
+	managers.vr:update(t, dt)
+end)
+function Setup:pre_render()
+	managers.vr:pre_render()
+end
+function Setup:render()
+	managers.vr:render()
+end

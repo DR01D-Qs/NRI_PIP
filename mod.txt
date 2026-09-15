@@ -1,0 +1,31 @@
+{
+	"name" : "PiP Scopes",
+	"description" : "Picture-in-Picture scopes, ported from VR thanks to the Diesel 3.0 update",
+	"author" : "DR01D_Qs",
+	"contact" : "https://discord.gg/aYGvrAdGcZ",
+	"version" : "1",
+	"blt_version" : 2,
+
+	"updates" : [
+		{
+			"identifier" : "NRI_PIP",
+			"host" : {
+				"meta" : "https://raw.githubusercontent.com/DR01D-Qs/NRI_PIP/refs/heads/main/meta.json",
+			}
+		}
+	],
+
+	"hooks" : [
+		{"hook_id":"lib/units/weapons/newraycastweaponbase","script_path":"nri_pip_newraycastweaponbase.lua"},
+		{"hook_id":"lib/units/beings/player/playercamera","script_path":"nri_pip_playercamera.lua"},
+		{"hook_id":"lib/units/beings/player/states/playerstandard","script_path":"nri_pip_playerstandard.lua"},
+		{"hook_id":"lib/units/weapons/scopebase","script_path":"nri_pip_scopebase.lua"},
+		{"hook_id":"lib/units/cameras/scopecamera","script_path":"nri_pip_scopecamera.lua"},
+		{"hook_id":"lib/setups/setup","script_path":"nri_pip_setup.lua"},
+		{"hook_id":"lib/managers/menumanager","script_path":"nri_pip_menumanager.lua"},
+		{"hook_id":"lib/managers/vrmanagerpd2","script_path":"nri_pip_vrmanagerpd2.lua"},
+		{"hook_id":"lib/managers/weaponfactorymanager","script_path":"nri_pip_weaponfactorymanager.lua"},
+		{"hook_id":"lib/tweak_data/weaponfactorytweakdata","script_path":"nri_pip_weaponfactorytweakdata.lua"}
+	]
+}
+
