@@ -11,4 +11,7 @@
 
 	"nri_pip_zoom_mul_title" : "Zoom Multiplier",
 	"nri_pip_zoom_mul_desc" : "Global multiplier of the scopes' zoom level. Switch weapons to apply.",
+
+	"nri_pip_fov_based_title" : "Keep ''FOV Relative Sensitivity''",
+	"nri_pip_fov_based_desc" : "Makes the ''FOV Relative Sensitivity'' setting still think your FOV is zoomed in when using a scope. Toggle this OFF for it to consider the actual FOV.",
 }

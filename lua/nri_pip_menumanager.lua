@@ -2,6 +2,7 @@ _G.NRI_PIP = _G.NRI_PIP or {}
 NRI_PIP._path = ModPath
 NRI_PIP._loc_path = ModPath .. "loc/"
 NRI_PIP._settings_path = SavePath .. "NRI_PIP_Savefile.txt"
+NRI_PIP.settings = NRI_PIP.settings or {}
 
 
 
@@ -9,6 +10,7 @@ function NRI_PIP:Reset()
 	NRI_PIP.settings = {
         nri_pip_res_scaling = 4,
 		nri_pip_zoom_mul = 1,
+		nri_pip_fov_based = true,
 	}
 end
 function NRI_PIP:Save()
@@ -21,13 +23,7 @@ end
 function NRI_PIP:Load()
 	local file = io.open( NRI_PIP._settings_path, "r" )
 	if file then
-		NRI_PIP:Reset() 
-
-		local saved_settings = json.decode( file:read("*all") ) or {}
-		for k, v in pairs(saved_settings) do
-			NRI_PIP.settings[k] = v
-		end
-
+		NRI_PIP.settings = json.decode( file:read("*all") )
 		file:close()
 	else
 		NRI_PIP:Reset()
@@ -54,6 +50,10 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_NRI_PIP", function(men
 	end
 	MenuCallbackHandler.nri_pip_zoom_mul_callback = function(self, item)
 		NRI_PIP.settings.nri_pip_zoom_mul = item:value()
+		NRI_PIP:Save()
+	end
+	MenuCallbackHandler.nri_pip_fov_based_callback = function(self, item)
+		NRI_PIP.settings.nri_pip_fov_based = (item:value()=="on")
 		NRI_PIP:Save()
 	end
 

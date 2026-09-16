@@ -5,6 +5,17 @@ Hooks:PostHook( WeaponFactoryTweakData, "init", "nri_pip_WeaponFactoryTweakData:
 				return not managers.menu_scene
 			end
 		end
+
+		if k.steelsight_visible==false and k.adds then
+			k.steelsight_visible = nil
+
+			for u, j in pairs(k.adds) do
+				if string.find(j, "_steelsight", 1, true) and self.parts[j] and self.parts[j].steelsight_visible then
+					table.remove(k.adds, u)
+					break
+				end
+			end
+		end
 	end
 
 	local ovk_pls = {
@@ -17,7 +28,8 @@ Hooks:PostHook( WeaponFactoryTweakData, "init", "nri_pip_WeaponFactoryTweakData:
 		self.parts[k].camera = deep_clone(self.parts.wpn_fps_upg_o_specter.camera)
 		self.parts[k].camera.fov = 11
 	end
-end)
 
-function WeaponFactoryTweakData:_init_steelsight_units()
-end
+	for i, k in pairs(self.parts.wpn_fps_upg_o_box.stance_mod) do
+		k.translation = Vector3(k.translation.x, k.translation.y, k.translation.z-0.35)
+	end
+end)
