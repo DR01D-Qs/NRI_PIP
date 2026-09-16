@@ -12,6 +12,7 @@ function NRI_PIP:Reset()
         nri_pip_aa = true,
 		nri_pip_zoom_mul = 1,
 		nri_pip_fov_based = true,
+		nri_pip_o_cs = true,
 	}
 end
 function NRI_PIP:Save()
@@ -59,6 +60,10 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_NRI_PIP", function(men
 	end
 	MenuCallbackHandler.nri_pip_fov_based_callback = function(self, item)
 		NRI_PIP.settings.nri_pip_fov_based = (item:value()=="on")
+		NRI_PIP:Save()
+	end
+	MenuCallbackHandler.nri_pip_o_cs_callback = function(self, item)
+		NRI_PIP.settings.nri_pip_o_cs = (item:value()=="on")
 		NRI_PIP:Save()
 	end
 

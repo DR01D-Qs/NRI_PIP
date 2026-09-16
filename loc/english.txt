@@ -17,4 +17,7 @@
 
 	"nri_pip_fov_based_title" : "Keep ''FOV Relative Sensitivity''",
 	"nri_pip_fov_based_desc" : "Makes the ''FOV Relative Sensitivity'' setting still think your FOV is zoomed in when using a scope. Toggle this OFF for it to consider the actual FOV.",
+
+	"nri_pip_o_cs_title" : "PiP ''Combat Sight''",
+	"nri_pip_o_cs_desc" : "Toggle this OFF if you want a bit of realism for the ''Combat Sight'' that shouldn't have optical magnification. Works in VR too. Restart the heist to apply.",
 }
