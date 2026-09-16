@@ -3,7 +3,7 @@ function PlayerStandard:get_zoom_fov(stance_data)
 	local fov_multiplier = self._setting_fov_multiplier
 
 	if self._state_data.in_steelsight then
-		fov = tweak_data.weapon.stats.zoom[1]
+		fov = self._equipped_unit:base()._scope_camera_configuration and tweak_data.weapon.stats.zoom[1] or self._equipped_unit:base():zoom()
 		fov_multiplier = 1 + (fov_multiplier - 1) / 2
 	end
 

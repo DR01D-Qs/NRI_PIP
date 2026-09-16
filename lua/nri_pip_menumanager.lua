@@ -9,6 +9,7 @@ NRI_PIP.settings = NRI_PIP.settings or {}
 function NRI_PIP:Reset()
 	NRI_PIP.settings = {
         nri_pip_res_scaling = 4,
+        nri_pip_aa = true,
 		nri_pip_zoom_mul = 1,
 		nri_pip_fov_based = true,
 	}
@@ -46,6 +47,10 @@ end)
 Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_NRI_PIP", function(menu_manager)
 	MenuCallbackHandler.nri_pip_res_scaling_choice_callback = function(self, item)
 		NRI_PIP.settings.nri_pip_res_scaling = item:value()
+		NRI_PIP:Save()
+	end
+	MenuCallbackHandler.nri_pip_aa_callback = function(self, item)
+		NRI_PIP.settings.nri_pip_aa = (item:value()=="on")
 		NRI_PIP:Save()
 	end
 	MenuCallbackHandler.nri_pip_zoom_mul_callback = function(self, item)

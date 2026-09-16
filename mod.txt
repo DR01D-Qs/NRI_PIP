@@ -3,7 +3,7 @@
 	"description" : "Picture-in-Picture scopes, ported from VR thanks to the Diesel 3.0 update",
 	"author" : "DR01D_Qs",
 	"contact" : "https://discord.gg/aYGvrAdGcZ",
-	"version" : "1.1",
+	"version" : "1.2",
 	"blt_version" : 2,
 
 	"updates" : [

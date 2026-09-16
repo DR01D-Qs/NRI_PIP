@@ -28,7 +28,9 @@ function ScopeCamera:_setup_camera()
 	vp:set_pre_render(true)
 	vp:vp():set_post_processor_effect("World", Idstring("shadow_processor"), Idstring("identity"))
 	vp:vp():set_post_processor_effect("World", Idstring("ao_post_processor"), Idstring("AO_aob"))
-	vp:vp():set_post_processor_effect("World", Idstring("anti_aliasing_post_processor"), Idstring("AA_off"))
+	if NRI_PIP.settings.nri_pip_aa==false then
+		vp:vp():set_post_processor_effect("World", Idstring("anti_aliasing_post_processor"), Idstring("AA_off"))
+	end
 
 	local clear_vp = managers.vr:new_vp(0, 0, scale_x, scale_y, "scope_clear", CoreManagerBase.PRIO_WORLDCAMERA)
 

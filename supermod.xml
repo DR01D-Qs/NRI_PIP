@@ -3,6 +3,7 @@
 	<assets base_path="assets/">
 		<file name="units/pd2_dlc_mxm/weapons/wpn_fps_upg_o_atibal/wpn_fps_upg_o_atibal.model" />
 		<file name="units/pd2_dlc_mxm/weapons/wpn_fps_upg_o_atibal/wpn_fps_upg_o_atibal.object" />
+		<file name="units/pd2_dlc_mxm/weapons/wpn_fps_upg_o_hamr/wpn_fps_upg_o_hamr.model" />
 		<file name="units/pd2_dlc_tawp/weapons/wpn_fps_upg_o_poe/wpn_fps_upg_o_poe.model" />
 	</assets>
 </mod>
