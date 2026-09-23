@@ -1,3 +1,5 @@
+if _G.IS_VR then return end
+
 require("lib/utils/VRLoadingEnvironment")
 
 VRViewport = VRViewport or class()
@@ -12,8 +14,6 @@ function VRManagerPD2:init()
 		PackageManager:load("packages/vr_base")
 	end
 
-	if _G.IS_VR then VRManager:set_max_adaptive_levels(7) end
-
 	self._adaptive_scale = {
 		0.85,
 		0.9,
@@ -24,12 +24,9 @@ function VRManagerPD2:init()
 	}
 	self._adaptive_scale_max = 1.4
 
-	if _G.IS_VR then VRManager:set_present_post_processor(Idstring("core/shaders/render_to_backbuffer"), Idstring("stretch_copy"), "back_buffer") end
-
 	self._is_default_hmd = true
-	if _G.IS_VR then self._is_oculus = string.find(string.lower(VRManager:hmd_manufacturer()), "oculus") ~= nil end
 	self._is_default_hmd = self._is_default_hmd and not self._is_oculus
-	self._super_sample_scale = _G.IS_VR and VRManager:super_sample_scale() or 1
+	self._super_sample_scale = 1
 	self._viewports = {}
 	self._default = {
 		belt_height_ratio = 0.6,

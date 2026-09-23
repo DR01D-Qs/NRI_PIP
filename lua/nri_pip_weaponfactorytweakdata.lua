@@ -28,19 +28,7 @@ Hooks:PostHook( WeaponFactoryTweakData, "init", "nri_pip_WeaponFactoryTweakData:
 	--enable pip objects for sights that have it
 	for i, k in pairs(self.parts) do
 		if k.camera and k.visibility then
-			k.visibility[1].condition = function () return not managers.menu_scene end
-
-			--disable steelsight_swap for pip sights
-			if k.steelsight_visible==false and k.adds then
-				k.steelsight_visible = nil
-
-				for u, j in pairs(k.adds) do
-					if string.find(j, "_steelsight", 1, true) and self.parts[j] and self.parts[j].steelsight_visible then
-						table.remove(k.adds, u)
-						break
-					end
-				end
-			end
+			k.visibility[1].condition = nil
 		end
 	end
 
@@ -73,7 +61,7 @@ Hooks:PostHook( WeaponFactoryTweakData, "init", "nri_pip_WeaponFactoryTweakData:
 		end
 	end
 
-	--y-adjusting broken stance_mods of sniper rifles
+	--sniper rifles y-adjustments
 	self.nri_pip_trns_adjusts = {
 		wpn_fps_snp_m95 = 15,
 		wpn_fps_snp_mosin = -6,
@@ -81,9 +69,31 @@ Hooks:PostHook( WeaponFactoryTweakData, "init", "nri_pip_WeaponFactoryTweakData:
 		wpn_fps_snp_siltstone = 10,
 		wpn_fps_snp_victor = 3,
 		wpn_fps_snp_scout = -8,
+		wpn_fps_snp_tti = 2,
+		wpn_fps_snp_r93 = -3,
+	}
+	--non-sniper sights y-adjustments, relative to the acog
+	self.nri_pip_trns_adjusts_sights = {
+		wpn_fps_upg_o_specter = -3,
+		wpn_fps_upg_o_cs = -3,
+		wpn_fps_upg_o_spot = -1,
+		wpn_fps_upg_o_hamr = -3,
+		wpn_fps_upg_o_atibal = -3,
+		wpn_fps_upg_o_poe = -2,
 	}
 	for i, k in pairs(self.parts) do
 		if k.stance_mod then
+			--experimental y-adjusting of non-sniper sights
+			if k.camera and not table.contains(self.nri_pip_snoptics, i) then
+				for u, j in pairs(self.parts.wpn_fps_upg_o_acog.stance_mod) do
+					local trns = k.stance_mod[u] and k.stance_mod[u].translation
+					if trns and j.translation then
+						k.stance_mod[u].translation = Vector3(trns.x, j.translation.y + (self.nri_pip_trns_adjusts_sights[i] or 0), trns.z)
+					end
+				end
+			end
+
+			--y-adjusting broken stance_mods of sniper rifles
 			for u, j in pairs(self.nri_pip_trns_adjusts) do
 				local trns = k.stance_mod[u] and k.stance_mod[u].translation
 				if trns then k.stance_mod[u].translation = Vector3(trns.x, j, trns.z) end
@@ -94,4 +104,11 @@ Hooks:PostHook( WeaponFactoryTweakData, "init", "nri_pip_WeaponFactoryTweakData:
 			if awp_trns then k.stance_mod.wpn_fps_snp_awp.translation = awp_trns + Vector3(0.05, 0, 0) end
 		end
 	end
+
+
+
+	--rangefinder lens hud params
+	self.parts.wpn_fps_upg_o_leupold.display_gui = { offset = Vector3(-0.6,100,0.8) }
+	self.parts.wpn_fps_upg_o_box.display_gui = { offset = Vector3(-0.8,70,-0.7) }
+	self.parts.wpn_fps_upg_o_spot.display_gui = { offset = Vector3(0,40,0.7) }
 end)

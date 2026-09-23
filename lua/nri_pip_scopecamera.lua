@@ -48,6 +48,34 @@ function ScopeCamera:_setup_camera()
 	self._clear_vp = clear_vp
 end
 
+function ScopeCamera:link_scope(camera_object, screen_object, material, texture_channel, zoom, display_gui)
+	material:set_variable(Idstring("scope_zoom"), 1)
+	material:set_variable(Idstring("scope_fadeout"), 1)
+	if managers.menu_scene then
+		material:set_variable(Idstring("scope_fadeout_params"), Vector3(1000, 20, 0))
+	end
+
+	self._material = material
+
+	self._camera:link(camera_object)
+	Application:set_material_texture(material, texture_channel, self._render_target)
+
+	self._texture_channel = texture_channel
+
+	self._camera:set_fov(zoom)
+	self._vp:set_active(true)
+	self._clear_vp:set_active(true)
+
+	self._camera_object = camera_object
+	self._screen_object = screen_object
+	self._scope_active = true
+
+	self._display_gui = display_gui
+	if self._display_gui then
+		self._display_gui.loc_pos = self._display_gui.obj:local_position()
+	end
+end
+
 function ScopeCamera:update(t, dt)
 	if not self._scope_active then
 		return
@@ -69,12 +97,21 @@ function ScopeCamera:update(t, dt)
 		self._material:set_variable(Idstring("scope_zoom"), zoom)
 
 		local angle = math.dot(dir, self._camera_object:rotation():y())
-		local visible = (angle > 0.965 or length < 20) and true or false
-		visible = visible and not collision
+		local visible = not collision and (angle > 0.983) and true or false
 
 		self._material:set_variable(Idstring("scope_fadeout"), visible and 0 or 1)
 		self._vp:set_active(visible)
 		self._clear_vp:set_active(visible)
+
+		if not managers.menu_scene and self._display_gui then
+			if visible and not self._display_visible then
+				self._display_visible = true
+				self._display_gui.obj:set_local_position(self._display_gui.loc_pos + self._display_gui.offset)
+			elseif not visible and self._display_visible then
+				self._display_visible = false
+				self._display_gui.obj:set_local_position(self._display_gui.loc_pos)
+			end
+		end
 
 		local scale_settings = { 0.125, 0.25, 0.5, 1, 2, 4 }
 		local scale_setting = NRI_PIP.settings.nri_pip_res_scaling

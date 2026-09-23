@@ -6,3 +6,10 @@ function RaycastWeaponBase:zoom()
 
 	return self._zoom
 end
+
+local orig__check_reticle_obj = NewRaycastWeaponBase._check_reticle_obj
+function NewRaycastWeaponBase:_check_reticle_obj()
+	orig__check_reticle_obj(self)
+
+	if self._scope_camera_configuration then self._reticle_obj = nil end
+end
